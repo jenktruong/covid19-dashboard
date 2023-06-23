@@ -7,6 +7,8 @@ This project is inspired by Alex the Analyst's YouTube videos.
 
 Data Source: [Our World In Data](https://ourworldindata.org/covid-deaths)
 
+SQL queries were written using BigQuery Sandbox. 
+
 ## Contents
 
 Raw data: owid-covid-data.csv (using data from January 2020 to June 2023)
