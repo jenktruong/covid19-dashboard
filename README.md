@@ -6,3 +6,7 @@ This project is inspired by Alex the Analyst's YouTube videos.
 - Data Analyst Portfolio Project |
 
 Data Source: [Our World In Data](https://ourworldindata.org/covid-deaths)
+
+## Contents
+
+Raw data: owid-covid-data.csv
