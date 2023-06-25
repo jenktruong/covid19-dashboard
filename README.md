@@ -7,7 +7,7 @@ This project is inspired by Alex the Analyst's YouTube videos.
 
 Data Source: [Our World In Data](https://ourworldindata.org/covid-deaths)
 
-**Business Question:** How has the proportion of COVID deaths vs vaccinataions changed over time from March 2020 (the beginning of the emergency lockdown) to June 2023 (the end of the emergency)?
+**Business Question:** How have the rates of COVID-19 deaths and vaccinataions changed over time worldwide?
 
 ## Contents
 
