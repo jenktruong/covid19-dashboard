@@ -35,9 +35,9 @@ WITH `datasciportfolio.covid19.PopvsVac` AS
   (SELECT dea.continent,
     dea.location,
     dea.date,
-    dea.population,
-    vac.new_vaccinations,
-    SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_vaccinations
+    IFNULL(dea.population,0) AS population,
+    IFNULL(vac.new_vaccinations,0) AS new_vaccinations,
+    IFNULL(SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date),0) AS rolling_vaccinations
   FROM `datasciportfolio.covid19.covid-deaths` dea
   JOIN `datasciportfolio.covid19.covid-vaccinations` vac
     ON dea.location = vac.location 
@@ -59,9 +59,9 @@ WITH `datasciportfolio.covid19.PopvsVac` AS
   (SELECT dea.continent,
     dea.location,
     dea.date,
-    dea.population,
-    vac.new_vaccinations,
-    SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_vaccinations
+    IFNULL(dea.population,0) AS population,
+    IFNULL(vac.new_vaccinations,0) AS new_vaccinations,
+    IFNULL(SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date),0) AS rolling_vaccinations
   FROM `datasciportfolio.covid19.covid-deaths` dea
   JOIN `datasciportfolio.covid19.covid-vaccinations` vac
     ON dea.location = vac.location 
