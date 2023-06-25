@@ -55,18 +55,23 @@ ORDER BY location, date;
 
 -- vaccination rates
 CREATE VIEW `datasciportfolio.covid19.PercentPopVaccinated` AS
-SELECT dea.continent,
-  dea.location,
-  dea.date,
-  dea.population,
-  vac.new_vaccinations,
-  SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_vaccinations
-FROM `datasciportfolio.covid19.covid-deaths` dea
-JOIN `datasciportfolio.covid19.covid-vaccinations` vac
-  ON dea.location = vac.location 
-  AND dea.date = vac.date
-WHERE dea.continent IS NOT NULL
-ORDER BY dea.location, dea.date;
+WITH `datasciportfolio.covid19.PopvsVac` AS 
+  (SELECT dea.continent,
+    dea.location,
+    dea.date,
+    dea.population,
+    vac.new_vaccinations,
+    SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_vaccinations
+  FROM `datasciportfolio.covid19.covid-deaths` dea
+  JOIN `datasciportfolio.covid19.covid-vaccinations` vac
+    ON dea.location = vac.location 
+    AND dea.date = vac.date
+  WHERE dea.continent IS NOT NULL
+  )
+SELECT *,
+  ROUND((rolling_vaccinations/population)*100, 3) AS vac_rate
+FROM `datasciportfolio.covid19.PopvsVac`
+ORDER BY location, date;
 
 -- highest infection rates by country
 CREATE VIEW `datasciportfolio.covid19.HighInfectionRateCountry` AS
