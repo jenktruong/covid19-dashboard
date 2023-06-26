@@ -84,6 +84,18 @@ WHERE continent IS NOT NULL
 GROUP BY location, population
 ORDER BY pct_population_infected DESC;
 
+-- highest infection rates by country AND time
+CREATE VIEW `datasciportfolio.covid19.HighInfectionRateCountryTime` AS
+SELECT location, 
+  date,
+  MAX(total_cases) AS highest_infection_count, 
+  population, 
+  MAX((total_cases/population))*100 AS pct_population_infected
+FROM `datasciportfolio.covid19.covid-deaths` 
+WHERE continent IS NOT NULL
+GROUP BY location, population, date
+ORDER BY pct_population_infected DESC;
+
 -- deaths by country
 CREATE VIEW `datasciportfolio.covid19.HighDeathRateCountry`AS
 SELECT location,  
