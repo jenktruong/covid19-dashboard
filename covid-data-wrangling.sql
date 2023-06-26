@@ -35,9 +35,9 @@ WITH `datasciportfolio.covid19.PopvsVac` AS
   (SELECT dea.continent,
     dea.location,
     dea.date,
-    IFNULL(dea.population,0) AS population,
-    IFNULL(vac.new_vaccinations,0) AS new_vaccinations,
-    IFNULL(SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date),0) AS rolling_vaccinations
+    dea.population,
+    vac.new_vaccinations,
+    SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.location, dea.date) AS rolling_vaccinations
   FROM `datasciportfolio.covid19.covid-deaths` dea
   JOIN `datasciportfolio.covid19.covid-vaccinations` vac
     ON dea.location = vac.location 
@@ -81,6 +81,7 @@ SELECT location,
   MAX((total_cases/population))*100 AS pct_population_infected
 FROM `datasciportfolio.covid19.covid-deaths` 
 WHERE continent IS NOT NULL
+  AND location NOT IN ('World', 'European Union', 'International')
 GROUP BY location, population
 ORDER BY pct_population_infected DESC;
 
@@ -103,6 +104,7 @@ SELECT location,
   MAX(total_deaths) AS total_death_count
 FROM `datasciportfolio.covid19.covid-deaths` 
 WHERE continent IS NOT NULL
+  AND location NOT IN ('World', 'European Union', 'International')
 GROUP BY location
 ORDER BY total_death_count DESC;
 
@@ -112,6 +114,7 @@ SELECT continent,
   MAX(total_deaths) AS total_death_count
 FROM `datasciportfolio.covid19.covid-deaths` 
 WHERE continent IS NOT NULL
+  AND location NOT IN ('World', 'European Union', 'International')
 GROUP BY continent
 ORDER BY total_death_count DESC;
 
@@ -122,4 +125,5 @@ SELECT
   MAX(total_deaths) AS global_deaths,
   MAX(total_deaths)/MAX(total_cases)*100 AS death_percentage
 FROM `datasciportfolio.covid19.covid-deaths`
-WHERE continent IS NOT NULL;
+WHERE continent IS NOT NULL
+  AND location NOT IN ('World', 'European Union', 'International');
