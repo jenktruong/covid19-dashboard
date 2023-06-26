@@ -88,9 +88,9 @@ ORDER BY pct_population_infected DESC;
 CREATE VIEW `datasciportfolio.covid19.HighInfectionRateCountryTime` AS
 SELECT location, 
   date,
-  MAX(total_cases) AS highest_infection_count, 
+  IFNULL(MAX(total_cases),0) AS highest_infection_count, 
   population, 
-  MAX((total_cases/population))*100 AS pct_population_infected
+  IFNULL(MAX((total_cases/population))*100,0) AS pct_population_infected
 FROM `datasciportfolio.covid19.covid-deaths` 
 WHERE continent IS NOT NULL
 GROUP BY location, population, date
