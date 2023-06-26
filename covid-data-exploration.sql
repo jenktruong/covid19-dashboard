@@ -10,7 +10,11 @@ FROM `datasciportfolio.covid19.covid-deaths`
 ORDER BY location, date;
 
 
--- check 10 most populous countries really quickly
+/*
+Check 10 most populous countries really quickly!
+Output: China, India, United States, Indonesia, Pakistan, Nigeria, Brazil, Bangladesh, Russia, Mexico
+Double checked with World Atlas (https://www.worldatlas.com/articles/most-populated-countries-in-the-world.html) to make sure and yep, top 10 countries are correct.
+*/
 
 SELECT location, 
   population
@@ -19,6 +23,7 @@ WHERE continent IS NOT NULL
 GROUP BY location, population
 ORDER BY population DESC
 LIMIT 10;
+
 
 -- Looking at total cases vs. population in the US
 -- case_percent shows what percentage of the population got COVID
