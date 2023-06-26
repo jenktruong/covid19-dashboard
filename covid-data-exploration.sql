@@ -10,6 +10,16 @@ FROM `datasciportfolio.covid19.covid-deaths`
 ORDER BY location, date;
 
 
+-- check 10 most populous countries really quickly
+
+SELECT location, 
+  population
+FROM `datasciportfolio.covid19.covid-deaths` 
+WHERE continent IS NOT NULL
+GROUP BY location, population
+ORDER BY population DESC
+LIMIT 10;
+
 -- Looking at total cases vs. population in the US
 -- case_percent shows what percentage of the population got COVID
 
