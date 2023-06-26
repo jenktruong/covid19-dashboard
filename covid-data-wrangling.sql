@@ -84,15 +84,16 @@ WHERE continent IS NOT NULL
 GROUP BY location, population
 ORDER BY pct_population_infected DESC;
 
--- highest infection rates by country AND time
-CREATE VIEW `datasciportfolio.covid19.HighInfectionRateCountryTime` AS
+-- infection rates by time AND in the top 10 countries
+CREATE VIEW `datasciportfolio.covid19.HighInfectionRateTop10` AS
 SELECT location, 
   date,
   IFNULL(MAX(total_cases),0) AS highest_infection_count, 
   population, 
   IFNULL(MAX((total_cases/population))*100,0) AS pct_population_infected
 FROM `datasciportfolio.covid19.covid-deaths` 
-WHERE continent IS NOT NULL
+WHERE continent IS NOT NULL AND
+  location in ('China', 'India', 'United States', 'Indonesia', 'Pakistan', 'Nigeria', 'Brazil', 'Bangladesh', 'Russia', 'Mexico')
 GROUP BY location, population, date
 ORDER BY pct_population_infected DESC;
 
