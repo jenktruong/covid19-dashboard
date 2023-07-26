@@ -15,4 +15,4 @@ Raw data: owid-covid-data.csv (using data from January 2020 to June 2023)
 
 SQL queries were written using BigQuery Sandbox. 
 
-Tableau dashboard can be found [here](https://public.tableau.com/app/profile/jennifer.truong4446/viz/COVID-19AroundTheWorld/COVID-19AroundTheWorld)!
+Tableau dashboard can be found [here](https://public.tableau.com/app/profile/jenktruong/viz/COVID-19AroundTheWorld/COVID-19AroundTheWorld)!
