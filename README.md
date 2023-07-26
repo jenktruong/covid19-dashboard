@@ -1,4 +1,4 @@
-# covid19-dashboard
+# COVID-19 Tableau Dashboard
 
 This project is inspired by Alex the Analyst's YouTube videos.
 
